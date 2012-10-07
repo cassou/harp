@@ -1,12 +1,12 @@
 /*
-    This file is part of ttymidi.
+    This file is part of ttymidi-ext.
 
     ttymidi is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    ttymidi is distributed in the hope that it will be useful,
+    ttymidi-ext is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
@@ -31,6 +31,9 @@
 #include <linux/serial.h>
 #include <linux/ioctl.h>
 #include <asm/ioctls.h>
+
+#include "ext.h"
+#include "synth.h"
 
 #define FALSE                         0
 #define TRUE                          1
@@ -139,8 +142,8 @@ void arg_set_defaults(arguments_t *arguments)
 	strncpy(arguments->name, name_tmp, MAX_DEV_STR_LEN);
 }
 
-const char *argp_program_version     = "ttymidi 0.60";
-const char *argp_program_bug_address = "tvst@hotmail.com";
+const char *argp_program_version     = "ttymidi-ext (based on ttymidi 0.60)";
+const char *argp_program_bug_address = "";
 static char doc[]       = "ttymidi - Connect serial port devices to ALSA MIDI programs!";
 static struct argp argp = { options, parse_opt, 0, doc };
 arguments_t arguments;
@@ -574,6 +577,10 @@ main(int argc, char** argv)
 	iret2 = pthread_create(&midi_in_thread, NULL, read_midi_from_serial_port, (void*) seq);
 	signal(SIGINT, exit_cli);
 	signal(SIGTERM, exit_cli);
+
+	synth_init();
+
+	start_controller_thread();
 
 	while (run)
 	{   
