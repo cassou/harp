@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 
@@ -28,29 +30,33 @@ void synth_init()
 	}
 }
 
-void synth_handleEvent(button_t btn[], int event)
+void synth_handleEvent(button_t btn[], unsigned char event)
 {
 	int i = 0;
 	while(btn[i].mask!=0)
 	{
-		cb_button_t cb;z
-
+		cb_button_t cb;
+		cb=NULL;
 		if((btn[i].id_bit&HIGH_BIT)==(event&HIGH_BIT))
 		{
 			if(event&btn[i].mask && !btn[i].status)
 			{
 				btn[i].status=1;
+				printf("%s on_press\n",btn[i].name);
 				cb = btn[i].on_press;
 			}
-			else if(!event&btn[i].mask && btn[i].status)
+			else if(!(event&btn[i].mask) && btn[i].status)
 			{
 				btn[i].status=0;
+				printf("%s on_release\n",btn[i].name);
 				cb = btn[i].on_release;
 			}
-
 			if(cb)
+			{
 				cb(btn[i].flag,btn[i].status);
+			}
 		}
+		i++;
 	}
 }
 

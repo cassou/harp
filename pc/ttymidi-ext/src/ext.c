@@ -14,16 +14,16 @@
 #include <linux/ioctl.h>
 #include <asm/ioctls.h>
 
+#include "com/com.h"
 #include "ext.h"
 #include "synth.h"
 
-#define SERIAL_CONTROLLER "/def/rfcomm0"
-#define BAUDRATE_CONTROLLER B115200
 
+
+void*  controller_loop(void * data);
 
 
 pthread_t controller_thread = 0;
-int controller_serial;
 
 button_t controller_btn[] = 
 {
@@ -51,57 +51,43 @@ button_t harp_btn[] =
 };
 
 
-
-void*  controller_loop(void * data);
-
-
+serial_port sp_controller;
+serial_port sp_harp;
 
 
-int start_controller_thread()
+
+int start_controller_thread(const char * serialPath, int speed)
 {
 	int ret;
+
+	sp_controller = uart_open (serialPath);
+    if ((sp_controller == CLAIMED_SERIAL_PORT) || (sp_controller == INVALID_SERIAL_PORT))
+        return EXIT_FAILURE;
+
+	uart_set_speed (sp_controller, speed);
+
+
 	ret = pthread_create(&controller_thread, NULL, controller_loop, NULL);
 	if(ret!=0)
 	{
 		perror("start_controller_thread");
-		exit(EXIT_FAILURE);
+		return EXIT_FAILURE;
 	}
+
+	return EXIT_SUCCESS;
 }
+
 void*  controller_loop(void * data)
 {
-	struct termios oldtio, newtio;
-	struct serial_struct ser_info;
-	char* modem_device = "/dev/ttyS0";
-
-	controller_serial = open(SERIAL_CONTROLLER, O_RDWR | O_NOCTTY ); 
-	if (controller_serial < 0) 
-	{
-		perror("open SERIAL_CONTROLLER"); 
-		exit(EXIT_FAILURE); 
-	}
-
-	tcgetattr(controller_serial, &oldtio); 
-	bzero(&newtio, sizeof(newtio)); 
-	newtio.c_cflag = BAUDRATE_CONTROLLER | CS8 | CLOCAL | CREAD; // CRTSCTS removed
-	newtio.c_iflag = IGNPAR;
-	newtio.c_oflag = 0;
-	newtio.c_lflag = 0; // non-canonical
-
-	newtio.c_cc[VTIME]    = 0;     /* inter-character timer unused */
-	newtio.c_cc[VMIN]     = 1;     /* blocking read until n character arrives */
-	tcflush(controller_serial, TCIFLUSH);
-	tcsetattr(controller_serial, TCSANOW, &newtio);
-
 	while(42)
 	{
-		char buff;
+		unsigned char buff;
 		int ret;
-		ret = read(controller_serial, &buff, 1);
-		if(ret==1)
+		if (uart_receive(sp_controller, &buff, 1, NULL, NULL) ==0)
 		{
-
+			printf("sp-controller received : %c\n",buff);
+			//synth_handleEvent(controller_btn,buff);
 		}
 
 	}
-
 }

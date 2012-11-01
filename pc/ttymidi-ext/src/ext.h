@@ -1,13 +1,13 @@
 #ifndef _EXT_H_
 #define _EXT_H_
 
-int start_controller_thread();
+int start_controller_thread(const char * serialPath, int speed);
 
 void synth_init();
 
 typedef struct {
 	char name[32];
-	int mask;
+	unsigned char mask;
 	int status;
 	int flag;
 	int id_bit;
