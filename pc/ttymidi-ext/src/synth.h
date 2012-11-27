@@ -5,11 +5,9 @@
 
 void synth_init();
 
-void synth_handleEvent(button_t btn[], unsigned char event);
-
-
 void synth_sharp(int flag, int status);
-void synth_octaveTranslate(int flag, int status);
+void synth_octaveUp(int flag, int status);
+void synth_octaveDown(int flag, int status);
 
 void synth_noteStart(int num, int status);
 void synth_noteStop(int num, int status);

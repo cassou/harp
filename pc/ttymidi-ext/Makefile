@@ -1,5 +1,5 @@
 all:
-	gcc src/*.c src/com/com.c  -o ttymidi -lasound -pthread
+	gcc src/*.c src/com/uart.c  -o ttymidi -lasound -pthread
 clean:
 	rm ttymidi
 install:
