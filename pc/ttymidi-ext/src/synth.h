@@ -3,14 +3,30 @@
 
 #include "ext.h"
 
-void synth_init();
+typedef struct 
+{
+	int octaveUp;
+	int octaveDown;
+	int sharp;
+	int btn2note[15];
+	int runningNote[15];
 
-void synth_sharp(int flag, int status);
-void synth_octaveUp(int flag, int status);
-void synth_octaveDown(int flag, int status);
+	int channel;
+	int velocity;
 
-void synth_noteStart(int num, int status);
-void synth_noteStop(int num, int status);
+} synth_t;
+
+extern synth_t synth1;
+extern synth_t synth2;
+
+void synth_init(synth_t * st);
+
+void synth_sharp(synth_t * st,int flag, int status);
+void synth_octaveUp(synth_t * st,int flag, int status);
+void synth_octaveDown(synth_t * st,int flag, int status);
+
+void synth_noteStart(synth_t * st,int num, int status);
+void synth_noteStop(synth_t * st,int num, int status);
 
 
 #endif //_SYNTH_H_

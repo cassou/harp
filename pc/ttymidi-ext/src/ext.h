@@ -1,7 +1,11 @@
 #ifndef _EXT_H_
 #define _EXT_H_
 
+
+#include "synth.h"
+
 int start_controller_thread(const char * serialPath, int speed);
+int start_harp_thread(const char * serialPath1,const char * serialPacth2, int speed);
 
 void synth_init();
 
@@ -17,7 +21,7 @@ typedef struct {
 
 
 
-typedef void(*cb_button_t)(int flag, int status) ;
+typedef void(*cb_button_t)(synth_t * st, int flag, int status) ;
 
 //void handle_event(int event);
 

@@ -21,13 +21,16 @@
 #define HIGH_BIT (1<<7)
 
 void*  controller_loop(void * data);
-void*  harp_loop(void * data);
+void*  harp_loop1(void * data);
+void*  harp_loop2(void * data);
 
 pthread_t controller_thread = 0;
-pthread_t harp_thread = 0;
+pthread_t harp_thread1 = 0;
+pthread_t harp_thread2 = 0;
 
 serial_port sp_controller;
-serial_port sp_harp;
+serial_port sp_harp1;
+serial_port sp_harp2;
 
 button_t controller_btn[] = 
 {
@@ -57,7 +60,7 @@ button_t harp_btn[] =
 };
 
 
-void btn_handleEvent(button_t btn[], unsigned char event)
+void btn_handleEvent(button_t btn[], unsigned char event,synth_t * st)
 {
     int i = 0;
     while(btn[i].mask!=0)
@@ -80,7 +83,7 @@ void btn_handleEvent(button_t btn[], unsigned char event)
             }
             if(cb)
             {
-                cb(btn[i].flag,btn[i].status);
+                cb(st,btn[i].flag,btn[i].status);
             }
         }
         i++;
@@ -109,20 +112,31 @@ int start_controller_thread(const char * serialPath, int speed)
     return EXIT_SUCCESS;
 }
 
-int start_harp_thread(const char * serialPath, int speed)
+int start_harp_thread(const char * serialPath1,const char * serialPath2,  int speed)
 {
-    int ret;
+    int ret1 = 0;
+    int ret2 = 0;
 
-    sp_harp = uart_open (serialPath);
-    if ((sp_harp == CLAIMED_SERIAL_PORT) || (sp_harp == INVALID_SERIAL_PORT))
-        return EXIT_FAILURE;
+    sp_harp1 = uart_open (serialPath1);
+    sp_harp2 = uart_open (serialPath2);
 
-    uart_set_speed (sp_harp, speed);
+    if (!((sp_harp1 == CLAIMED_SERIAL_PORT) || (sp_harp1 == INVALID_SERIAL_PORT)))
+    {
+        uart_set_speed (sp_harp1, speed);
+        uart_flush_input(sp_harp1);
+        ret1 += pthread_create(&harp_thread1, NULL, harp_loop1, NULL);
+        if (ret1==0) printf("Harpe 1 ok\n");
+    }
 
-    uart_flush_input(sp_harp);
+    if (!((sp_harp2 == CLAIMED_SERIAL_PORT) || (sp_harp2 == INVALID_SERIAL_PORT)))
+    {
+        uart_set_speed (sp_harp2, speed);
+        uart_flush_input(sp_harp2);
+        ret2 += pthread_create(&harp_thread2, NULL, harp_loop2, NULL);
+        if (ret2==0) printf("Harpe 2 ok\n");
+    }
 
-    ret = pthread_create(&harp_thread, NULL, harp_loop, NULL);
-    if(ret!=0)
+    if(ret1!=0 || ret2!=0)
     {
         perror("start_harp_thread");
         return EXIT_FAILURE;
@@ -141,34 +155,36 @@ void* controller_loop(void * data)
         if (uart_receive(sp_controller, &buff, 1, NULL, 0) ==0)
         {
             //printf("sp-controller received : %d %c\n",(int)buff,(char)buff);
-            btn_handleEvent(controller_btn,buff);
+            btn_handleEvent(controller_btn,buff,&synth1);
         }
 
     }
 }
 
-void*  harp_loop(void * data)
+void*  harp_loop1(void * data)
 {
     while(42)
     {
         unsigned char buff;
         int ret;
-        if (uart_receive(sp_harp, &buff, 1, NULL, 0) ==0)
+        if (uart_receive(sp_harp1, &buff, 1, NULL, 0) ==0)
         {
-            /*if(!(buff&HIGH_BIT))
-            {
-                printf("sp-harp received : ");
-                int j;
-                for (j = 7; j >= 0; j --)
-                {
-                    if ( (buff & (1 << j)) )
-                        printf("%d", 1);
-                    else
-                        printf("%d", 0);
-                }
-                printf("\n");
-            }*/
-            btn_handleEvent(harp_btn,buff);
+            btn_handleEvent(harp_btn,buff,&synth1);
+        }
+
+    }
+}
+
+
+void*  harp_loop2(void * data)
+{
+    while(42)
+    {
+        unsigned char buff;
+        int ret;
+        if (uart_receive(sp_harp2, &buff, 1, NULL, 0) ==0)
+        {
+            btn_handleEvent(harp_btn,buff,&synth2);
         }
 
     }
