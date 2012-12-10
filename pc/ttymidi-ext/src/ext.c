@@ -42,7 +42,7 @@ button_t controller_btn[] =
     {"",0,0,-1,0,NULL,NULL},
 };
 
-button_t harp_btn[] = 
+button_t harp_btn1[] = 
 {
     //name         mask    status    flag    id_bit    onpress    onrelease
     {"BTN_SHARP2", 1<<0,   0,        0,      0,        synth_sharp,       synth_sharp        },
@@ -59,9 +59,43 @@ button_t harp_btn[] =
     {"",0,0,-1,0,NULL,NULL},
 };
 
+button_t harp_btn2[] = 
+{
+    //name         mask    status    flag    id_bit    onpress    onrelease
+    {"BTN_SHARP2", 1<<0,   0,        0,      0,        synth_sharp,       synth_sharp        },
+    {"B1",         1<<1,   0,        1,      0,        synth_noteStart,   synth_noteStop        },
+    {"B2",         1<<2,   0,        2,      0,        synth_noteStart,   synth_noteStop        },
+    {"B3",         1<<3,   0,        3,      0,        synth_noteStart,   synth_noteStop        },
+    {"B4",         1<<4,   0,        4,      0,        synth_noteStart,   synth_noteStop        },
+    {"B5",         1<<5,   0,        5,      0,        synth_noteStart,   synth_noteStop        },
+    {"B6",         1<<1,   0,        6,      1,        synth_noteStart,   synth_noteStop        },
+    {"B7",         1<<2,   0,        7,      1,        synth_noteStart,   synth_noteStop        },
+    {"B8",         1<<3,   0,        8,      1,        synth_noteStart,   synth_noteStop        },
+    {"B9",         1<<4,   0,        9,      1,        synth_noteStart,   synth_noteStop        },
+    {"B10",        1<<5,   0,        10,     1,        synth_noteStart,   synth_noteStop        },
+    {"",0,0,-1,0,NULL,NULL},
+};
+
+void printbitssimple(int n) {
+    unsigned int i;
+    i = 1<<(1 * 8 - 1);
+
+    while (i > 0) {
+        if (n & i)
+            printf("1");
+        else
+            printf("0");
+        i >>= 1;
+    }
+    printf("\n");
+}
+
 
 void btn_handleEvent(button_t btn[], unsigned char event,synth_t * st)
 {
+
+    //printbitssimple(event );
+
     int i = 0;
     while(btn[i].mask!=0)
     {
@@ -72,13 +106,13 @@ void btn_handleEvent(button_t btn[], unsigned char event,synth_t * st)
             if(event&btn[i].mask && !btn[i].status)
             {
                 btn[i].status=1;
-                //printf("%s on_press\n",btn[i].name);
+                printf("%s on_press\n",btn[i].name);
                 cb = btn[i].on_press;
             }
             else if(!(event&btn[i].mask) && btn[i].status)
             {
                 btn[i].status=0;
-                //printf("%s on_release\n",btn[i].name);
+                printf("%s on_release\n",btn[i].name);
                 cb = btn[i].on_release;
             }
             if(cb)
@@ -169,7 +203,7 @@ void*  harp_loop1(void * data)
         int ret;
         if (uart_receive(sp_harp1, &buff, 1, NULL, 0) ==0)
         {
-            btn_handleEvent(harp_btn,buff,&synth1);
+            btn_handleEvent(harp_btn1,buff,&synth1);
         }
 
     }
@@ -184,7 +218,7 @@ void*  harp_loop2(void * data)
         int ret;
         if (uart_receive(sp_harp2, &buff, 1, NULL, 0) ==0)
         {
-            btn_handleEvent(harp_btn,buff,&synth2);
+            btn_handleEvent(harp_btn2,buff,&synth2);
         }
 
     }

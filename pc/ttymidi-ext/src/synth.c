@@ -19,6 +19,7 @@ snd_seq_t *seq;
 int open_seq(snd_seq_t** seq) ;
 
 
+
 //	int noteSet[]={65,67,69,71,72,74,76,77,79,81,83}; //tetris ok
 
 	//int noteSet[]={69,71,72,74,76,77,79,81,83,84,86,88}; //stwars ok
@@ -30,7 +31,7 @@ int open_seq(snd_seq_t** seq) ;
 //int noteSet[]={60,62,64,65,67,69,71,72,74,76,77,79,81,83}; 
 
 //chariot, fort boyard
-int noteSet[]={60,62,64,65,67,69,71,72,74,76,77,79,81,83}; //tetris ok
+//int noteSet[]={60,62,64,65,67,69,71,72,74,76,77,79,81,83}; //tetris ok
 
 
 
@@ -43,7 +44,6 @@ int noteSet[]={60,62,64,65,67,69,71,72,74,76,77,79,81,83}; //tetris ok
 //			  {fa  ,so,so+1,la,si,do  ,re,mi,fa,so}
 void synth_init(synth_t * st)
 {
-	int i;
 	memset (st,0,sizeof(st));
 
 	st->octaveUp=0;
@@ -51,22 +51,36 @@ void synth_init(synth_t * st)
 	st->channel=0;
 	st->velocity=0x45;
 
-
-
-	for (i = 1; i<=10; i++)
-	{
-		st->btn2note[i]=noteSet[i-1];
-	}
-
 	//midi init
 	port_out_id = open_seq(&seq);
 
 }
 
+void synth_setChannel(synth_t * st, int channel)
+{
+	st->channel = channel-1;
+}
+
+
+
+void synth_setNotSet(synth_t * st, noteSet_t ns)
+{
+	int i;
+	for (i = 1; i<=10; i++)
+	{
+		st->btn2note[i]=ns[i-1];
+	}
+}
+
 void synth_sharp(synth_t * st,int flag, int status)
 {
-	st->sharp=1-status;
-	printf("sharp : %d\n", st->sharp);
+	if (modnum!=2)
+		st->sharp=1-status;
+	else
+		st->sharp=(1-status)*8;
+
+
+	printf("modno : %d sharp : %d\n",modnum, st->sharp);
 }
 
 void synth_octaveUp(synth_t * st,int flag, int status)

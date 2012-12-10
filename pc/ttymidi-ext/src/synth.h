@@ -3,6 +3,8 @@
 
 #include "ext.h"
 
+typedef int noteSet_t[10];
+
 typedef struct 
 {
 	int octaveUp;
@@ -18,8 +20,11 @@ typedef struct
 
 extern synth_t synth1;
 extern synth_t synth2;
+extern volatile int modnum;
 
 void synth_init(synth_t * st);
+void synth_setNotSet(synth_t * st, noteSet_t ns);
+void synth_setChannel(synth_t * st, int channel);
 
 void synth_sharp(synth_t * st,int flag, int status);
 void synth_octaveUp(synth_t * st,int flag, int status);

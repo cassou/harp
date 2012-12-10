@@ -1,0 +1,454 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cha",
+				"channels"
+			],
+			[
+				"not",
+				"noteSet"
+			],
+			[
+				"sy",
+				"synth"
+			],
+			[
+				"file_",
+				"file_put_contents"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "ttymidi.c",
+			"settings":
+			{
+				"buffer_size": 2981,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext.c",
+			"settings":
+			{
+				"buffer_size": 6954,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/mcassard/dp3",
+			"settings":
+			{
+				"buffer_size": 152276,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 348.0,
+		"selected_items":
+		[
+			[
+				"its",
+				"Indentation: Convert to Spaces"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/includes/class/class.serviceSMS.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/xmlrpc_airpad.php",
+		"/home/mcassard/Bureau/tmp",
+		"/home/mcassard/perso/harp/pc/ttymidi-ext/src/synth.c",
+		"/home/mcassard/perso/harp/pc/ttymidi-ext/src/synth.h",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/asm-context.lua",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/xmlrpc_web.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/includes/config.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/public/switch.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/includes/db/mysql.php",
+		"/home/mcassard/perso/harp/pc/ttymidi-ext/src/ttymidi.c",
+		"/home/mcassard/dp2",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/includes/class/class.supportClub.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/total_lavage/includes/class/class.supportLavage.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/netevents/netevents.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_startWash.lua",
+		"/net/hq0build01/workspace/Total/Capture_gr3_dblcarte-echecinsuffisant.txt",
+		"/net/hq0build01/workspace/Total/Capture_gr2_lavagenormale.txt",
+		"/net/hq0build01/workspace/Total/Capture_gr1.txt",
+		"/net/hq0build01/workspace/scripts/dalle-capacitivator.sh",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_prog.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_aspi.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/event-function.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/asm-timer.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_wash.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_idle.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_thank.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/external_io_ws.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_yesNoQuestion.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_fid.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_insertCard.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/cardManager.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/localSettings.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/tests.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/admin.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen_error.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/external_io_udpsrv.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/asm-screenmanager.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/etc/default/antifraude.in",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/screen.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/external_io_serial.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/external_io_broadcast.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/functions.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary/event_send.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/udpsrv/event_send_to_gre.h",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary/file_mng.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary/broadcast_event.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary/broadcast_service.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/udpsrv/event_send_to_gre.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/udpsrv/event_send.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts/fid.lua",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/xmlrpc_client.php",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/bonne_journee/xmlrpc_airpad.php",
+		"/net/hq0build01/workspace/rootfs-testing/rules/applitest.in",
+		"/net/hq0build01/workspace/rootfs-testing/rules/total-lavage-rpc.make",
+		"/net/hq0build01/workspace/rootfs-testing/rules/dennys-rpc.make",
+		"/net/hq0build01/workspace/rootfs-testing/rules/total-lavage.in",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-configator-trunk/etc-totallavage",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-configator-trunk/etc-totallavage-php-ping",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-configator-trunk/configator.conf",
+		"/net/hq0dev01/isp/chroot/httpd/apps/airtag/airfid/rpc/clients/ouest_express/xmlrpc_airpad.php",
+		"/net/hq0build01/workspace/rootfs-testing/rules/king-croissant-rpc.make",
+		"/net/hq0build01/workspace/rootfs-testing/rules/bagel-corner-binaries.make",
+		"/net/hq0build01/workspace/Total/total-dump-21112012/apps/total-lavage/bin/list_synchro.sh",
+		"/net/hq0build01/workspace/Total/Total-lavage-quantin/binaries_v4_AdrienNewWS/listsynchro/event_sync_transaction.c",
+		"/net/hq0build01/workspace/Total/Total-lavage-quantin/binaries_v4_AdrienNewWS/listsynchro/event_list_synchro.c",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/bonne-journee-rpc-trunk/handlers/cli.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/bonne-journee-rpc-trunk/handlers/run.sh",
+		"/net/hq0build01/workspace/Total/total-dump-21112012/apps/total-lavage/bin/cronlistsynchro",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/handlers/cli.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/handlers/run.sh",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/public/switch.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/xmlrpc_airpad.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/xmlrpc_exports.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/db/mysql.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/class/class.account.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/includes/class/class.transaction.php",
+		"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk/public/httpd.php",
+		"/net/hq0build01/workspace/Total/vmadrien/workspace/total-lavage-6/bin_new/dev-httppost/event_send.c"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts",
+			"<open folders>,/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/netevents",
+			"<open folders>",
+			"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-gapp-trunk/scripts",
+			"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary",
+			"/net/hq0build01/workspace/rootfs-testing/local_src/bonne-journee-gapp-trunk/scripts",
+			"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-binaries-trunk/antifraud/binary",
+			"/net/hq0build01/workspace/rootfs-testing/local_src/total-lavage-rpc-trunk",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"+",
+			"btn_handleEvent",
+			"Context:set",
+			"<name>",
+			"name",
+			"uid\n}",
+			"\n}",
+			"idsu",
+			"logData",
+			"st.",
+			"harp_loop",
+			"synth.",
+			"synth",
+			"sms",
+			"event_support.c",
+			"ScrollReset",
+			"Waiting for data...",
+			"\n\nsetState",
+			"\n\nsetState(0",
+			"\n\nsetState(0)",
+			"\n\nStartWash:setState(0)",
+			"\n\n				StartWash:setState(0)",
+			"\nStartWash:setState(0",
+			"control",
+			"WriteLog",
+			"ProcessEventButton",
+			"ScreenManagerUpdateData",
+			"resetState",
+			"//",
+			"()..\"//\"..",
+			"//",
+			"v",
+			"()..\"//\"..",
+			"/",
+			"bs_send_message",
+			"event_send_new_card",
+			"path_synchro",
+			"path_black_list_available",
+			"ExtIOBroadcast",
+			"totale",
+			"bonne_journee",
+			"bonne-journee",
+			"get_config",
+			"server_call",
+			"xmlrpc_exports",
+			"ping",
+			"inde",
+			"bonne-journee",
+			"BONNE_JOURNEE",
+			"BONNE_JOURNE",
+			"server_call",
+			"xu_rpc_http",
+			"dump2string",
+			"xu_query_http_post",
+			"clearstatcache",
+			"$_CFG = array();",
+			"$_CFG['offline']",
+			"ping",
+			"check_file",
+			"count_dir",
+			"md5_dir",
+			"resync",
+			"ping",
+			"sync_transaction",
+			"fidOfferBurnLocalCard",
+			"sendEventDeportedPad",
+			"broadcast",
+			"fidCardHasFidOffer",
+			"screenKbNum",
+			"layer18_smsThanks",
+			"instant",
+			"screenPhoneThanks",
+			"updatePhoneSms",
+			"sms",
+			"sendPersonalizationCard",
+			"formatDataForNetEventPersoClub",
+			"event_sync_tansaction_handler",
+			"sendPersonalizationCard",
+			"formatDataForNetEventPersoClub",
+			"isWashProgramAvailable",
+			"fidCardHasFidOffer",
+			"formatDataForNetEventSms",
+			"updatePhoneSms",
+			"formatDataForNetEventSms"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"/"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "ttymidi.c",
+					"settings":
+					{
+						"buffer_size": 2981,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1226,
+								1226
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ext.c",
+					"settings":
+					{
+						"buffer_size": 6954,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3966,
+								3966
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 514.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/mcassard/dp3",
+					"settings":
+					{
+						"buffer_size": 152276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								118957,
+								118957
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 102.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.94302024547,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 103.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"star",
+				"scripts/screen_startWash.lua"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/mcassard/perso/harp/pc/ttymidi-ext/src/total-lavage.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 50.0,
+	"status_bar_visible": true
+}
