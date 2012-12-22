@@ -11,7 +11,7 @@
 #define SERIAL_HARPE2 "/dev/ttyUSB1"
 #define BAUDRATE_CONTROLLER 115200
 
-#define NOTESETCOUNT 7
+#define NOTESETCOUNT 8
 
 noteSet_t noteSet[NOTESETCOUNT][2] =
 {   
@@ -22,7 +22,8 @@ noteSet_t noteSet[NOTESETCOUNT][2] =
     {{62,64,65,67,69,71,72,74,76,79},{62,64,65,67,69,71,72,74,76,79}}, //small world
     {{60,62,64,65,67,69,71,72,74,76},{60,62,64,65,67,69,71,72,74,76}},  //fort boyard (trompette)
     {{60,62,64,65,67,69,71,72,74,76},{60,62,64,65,67,69,71,72,74,76}}, //bond brute truand
-    {{60,62,64,65,67,69,71,72,74,76},{60,62,64,65,67,69,71,72,74,76}} //pino do
+    {{60,62,64,65,67,69,71,72,74,76},{60,62,64,65,67,69,71,72,74,76}}, //pino do
+    {{65,67,69,71,72,74,76,77,79,81},{64-24,68-24,69-24,71-24,72-24,74-24,76-24,81-24,83-24,86-24}}, //tetris
 };
 
 int volatile modnum = 0;
@@ -36,6 +37,7 @@ int channels [NOTESETCOUNT][2] =
     {4,8},
     {6,7},
     {3,3},
+    {13,13},
 };
 
 int run = 1;
