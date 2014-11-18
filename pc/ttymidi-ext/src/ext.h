@@ -5,7 +5,7 @@
 #include "synth.h"
 
 int start_controller_thread(const char * serialPath, int speed);
-int start_harp_thread(const char * serialPath1,const char * serialPacth2, int speed);
+int start_harp_thread();
 
 void synth_init();
 

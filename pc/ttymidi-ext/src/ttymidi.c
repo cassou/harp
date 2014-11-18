@@ -45,37 +45,27 @@ int run = 1;
 
 main(int argc, char** argv)
 {
-    //signal(SIGINT, exit_cli);
-    //signal(SIGTERM, exit_cli);
-
-   
-    static struct termios oldt, newt;
-    tcgetattr( STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON);          
-    tcsetattr( STDIN_FILENO, TCSANOW, &newt);
-
-
     synth_init(&synth1);
-    synth_init(&synth2);
+    // synth_init(&synth2);
 
     synth_setNotSet(&synth1, noteSet[0][0]);
-    synth_setNotSet(&synth2, noteSet[0][1]);
+    // synth_setNotSet(&synth2, noteSet[0][1]);
 
     synth_setChannel(&synth1, channels[0][0]);
-    synth_setChannel(&synth2, channels[0][1]);
+    // synth_setChannel(&synth2, channels[0][1]);
 
-    if (start_controller_thread(SERIAL_CONTROLLER,BAUDRATE_CONTROLLER)!=EXIT_SUCCESS)
-    {
-       printf("Error lauching controller thread\n");
-        //goto cleanup;
-    }
-
-    if (start_harp_thread(SERIAL_HARPE1,SERIAL_HARPE2,BAUDRATE_CONTROLLER)!=EXIT_SUCCESS)
+    if (start_harp_thread()!=EXIT_SUCCESS)
     {
         printf("Error lauching harp thread\n");
         //goto cleanup;
     }
+
+    if (start_controller_thread("/dev/ttyACM0",115200)!=EXIT_SUCCESS)
+    {
+        printf("Error lauching harp thread\n");
+        //goto cleanup;
+    }
+
 
     printf("Threads launched\n");
     while (run)
@@ -100,16 +90,16 @@ main(int argc, char** argv)
             {
                 modnum = n;
                synth_setNotSet(&synth1, noteSet[n][0]);
-               synth_setNotSet(&synth2, noteSet[n][1]);
+               // synth_setNotSet(&synth2, noteSet[n][1]);
                synth_setChannel(&synth1, channels[n][0]);
-               synth_setChannel(&synth2, channels[n][1]);
+               // synth_setChannel(&synth2, channels[n][1]);
             }
         }
     }
 
     cleanup:
         /*restore the old settings*/
-    tcsetattr( STDIN_FILENO, TCSANOW, &oldt);
+
 
 
     printf("\ndone!\n");

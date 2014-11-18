@@ -18,6 +18,12 @@
 #include "ext.h"
 #include "synth.h"
 
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <strings.h>
+#include <arpa/inet.h>
+
 #define HIGH_BIT (1<<7)
 
 void*  controller_loop(void * data);
@@ -91,38 +97,7 @@ void printbitssimple(int n) {
 }
 
 
-void btn_handleEvent(button_t btn[], unsigned char event,synth_t * st)
-{
 
-    //printbitssimple(event );
-
-    int i = 0;
-    while(btn[i].mask!=0)
-    {
-        cb_button_t cb;
-        cb=NULL;
-        if((event&HIGH_BIT)==(btn[i].id_bit*HIGH_BIT))
-        {
-            if(event&btn[i].mask && !btn[i].status)
-            {
-                btn[i].status=1;
-                printf("%s on_press\n",btn[i].name);
-                cb = btn[i].on_press;
-            }
-            else if(!(event&btn[i].mask) && btn[i].status)
-            {
-                btn[i].status=0;
-                printf("%s on_release\n",btn[i].name);
-                cb = btn[i].on_release;
-            }
-            if(cb)
-            {
-                cb(st,btn[i].flag,btn[i].status);
-            }
-        }
-        i++;
-    }
-}
 
 int start_controller_thread(const char * serialPath, int speed)
 {
@@ -148,37 +123,14 @@ int start_controller_thread(const char * serialPath, int speed)
 
 int start_harp_thread(const char * serialPath1,const char * serialPath2,  int speed)
 {
-    int ret1 = 0;
-    int ret2 = 0;
-
-    sp_harp1 = uart_open (serialPath1);
-    sp_harp2 = uart_open (serialPath2);
-
-    if (!((sp_harp1 == CLAIMED_SERIAL_PORT) || (sp_harp1 == INVALID_SERIAL_PORT)))
-    {
-        uart_set_speed (sp_harp1, speed);
-        uart_flush_input(sp_harp1);
-        ret1 += pthread_create(&harp_thread1, NULL, harp_loop1, NULL);
-        if (ret1==0) printf("Harpe 1 ok\n");
-    }
-
-    if (!((sp_harp2 == CLAIMED_SERIAL_PORT) || (sp_harp2 == INVALID_SERIAL_PORT)))
-    {
-        uart_set_speed (sp_harp2, speed);
-        uart_flush_input(sp_harp2);
-        ret2 += pthread_create(&harp_thread2, NULL, harp_loop2, NULL);
-        if (ret2==0) printf("Harpe 2 ok\n");
-    }
-
-    if(ret1!=0 || ret2!=0)
-    {
-        perror("start_harp_thread");
-        return EXIT_FAILURE;
-    }
+    pthread_create(&harp_thread1, NULL, harp_loop1, NULL);
 
     return EXIT_SUCCESS;
 }
 
+
+int select_1=0;
+int select_2=0;
 
 void* controller_loop(void * data)
 {
@@ -188,38 +140,90 @@ void* controller_loop(void * data)
         int ret;
         if (uart_receive(sp_controller, &buff, 1, NULL, 0) ==0)
         {
-            //printf("sp-controller received : %d %c\n",(int)buff,(char)buff);
-            btn_handleEvent(controller_btn,buff,&synth1);
+            select_1=buff&0b00000001;
+            select_2=(buff&0b00000010)>>1;
         }
 
+    }
+}
+
+void btn_handleEvent(button_t btn[], int id, int status ,synth_t * st)
+{
+
+    cb_button_t cb;
+    cb=NULL;
+
+    if(status && !btn[id].status)
+    {
+        btn[id].status=1;
+        printf("%s on_press\n",btn[id].name);
+        cb = btn[id].on_press;
+    }
+    else if(!(status) && btn[id].status)
+    {
+        btn[id].status=0;
+        printf("%s on_release\n",btn[id].name);
+        cb = btn[id].on_release;
+    }
+    if(cb)
+    {
+        cb(st,btn[id].flag,btn[id].status);
     }
 }
 
 void*  harp_loop1(void * data)
 {
-    while(42)
-    {
-        unsigned char buff;
-        int ret;
-        if (uart_receive(sp_harp1, &buff, 1, NULL, 0) ==0)
-        {
-            btn_handleEvent(harp_btn1,buff,&synth1);
-        }
+    int sockfd,n;
+    struct sockaddr_in servaddr,cliaddr;
+    socklen_t len;
+    char mesg[1000];
 
+    sockfd=socket(AF_INET,SOCK_DGRAM,0);
+
+    bzero(&servaddr,sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr=htonl(INADDR_ANY);
+    servaddr.sin_port=htons(32000);
+    int ret = bind(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr));
+    if (ret){
+        perror("tut");
     }
+
+    while (42){
+        n = recvfrom(sockfd,mesg,1000,0,(struct sockaddr *)&cliaddr,&len);
+        mesg[n]=0;
+        int bt;
+        int slider;
+        int origin=atoi(inet_ntoa(cliaddr.sin_addr)+10);
+        if(origin>100){
+            origin=origin-110;
+            sscanf(mesg,"%d %d",&bt, &slider);
+
+            button_t  * harp_btn;
+            if(select_1){
+                harp_btn=harp_btn1;
+            }else{
+                harp_btn=harp_btn2;
+            }
+
+            btn_handleEvent(harp_btn,2*origin+0+select_2*8,bt,&synth1);
+            btn_handleEvent(harp_btn,2*origin+1+select_2*8,slider,&synth1);
+        }
+    }
+
 }
 
 
 void*  harp_loop2(void * data)
 {
-    while(42)
-    {
-        unsigned char buff;
-        int ret;
-        if (uart_receive(sp_harp2, &buff, 1, NULL, 0) ==0)
-        {
-            btn_handleEvent(harp_btn2,buff,&synth2);
-        }
+    // while(42)
+    // {
+    //     unsigned char buff;
+    //     int ret;
+    //     if (uart_receive(sp_harp2, &buff, 1, NULL, 0) ==0)
+    //     {
+    //         btn_handleEvent(harp_btn2,buff,&synth2);
+    //     }
 
-    }
+    // }
 }
